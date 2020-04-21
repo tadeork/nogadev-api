@@ -11,6 +11,9 @@ class BookController extends Controller
         return Book::find($id);
     }
 
+    /**
+     * Display all books
+     */
     public function index() {
         return Book::all();
     }
