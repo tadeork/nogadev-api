@@ -15,7 +15,37 @@ class BookController extends Controller
      * Display all books
      */
     public function index() {
-        return Book::all();
+        $mediterreanFruits = array('manzana', 'naranja', 'uva');
+        $tropicalFruits = array('ananá', 'mango');
+
+        $fruitSalad = $this->mix($mediterreanFruits, $tropicalFruits);
+        $fruitSaladWithoutMango = $this->removeFruit($fruitSalad, 'mango');
+
+        $this->serveTrait($fruitSaladWithoutMango);
+    }
+
+    protected function mix($mainElements, $companionElement) {
+        foreach ($companionElement as $companion) {
+            array_push($mainElements, $companion);
+        }
+        
+        return $mainElements;
+    }
+
+    protected function serveTrait($mealTrait) {
+        foreach ($mealTrait as $key => $trait) {
+            print_r('key: ' . $key . ' => ' . 'value: ' . $trait. '</br>' );
+        }
+    }
+
+    protected function removeFruit($fruitSalad, $notDesiredFruit) {
+        foreach ($fruitSalad as $fruit) {
+            if ($notDesiredFruit == $fruit) {
+                array_pop($fruit);
+            }
+        }
+
+        return $fruitSalad;
     }
 
     /**
